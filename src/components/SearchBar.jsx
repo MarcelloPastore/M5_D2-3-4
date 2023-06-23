@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+// ? importo i dati da react-bootstrap
 import Col from 'react-bootstrap/esm/Col';
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/esm/Row';
@@ -22,7 +22,7 @@ const SearchBar = ({books, setBooks, getBooks}) => {
 
         setBooks(filterBooks);
     };
-
+    // ! possiamo considerarlo un refactor
     const handleResetSearchBar = (value) => {
         if (value === '') {
             getBooks();

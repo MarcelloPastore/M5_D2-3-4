@@ -7,7 +7,7 @@ import { nanoid } from 'nanoid'
 
 const WelcomeHero = () => {
   return (
-    <Carousel>
+    <Carousel >
       {carouselItems.map((item) => {
         return(
             <Carousel.Item key={nanoid()}>

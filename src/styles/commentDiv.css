@@ -1,0 +1,13 @@
+.commentDiv {
+    display: block;
+    margin: 0.4rem;
+    padding: 0.4rem;
+    background-color: lightgray;
+    border-radius: 0.2rem;
+}
+.commentDiv p {
+    margin: 0.2rem;
+}
+.commentDiv p:last-child {
+    padding-left: 0.5rem;
+}

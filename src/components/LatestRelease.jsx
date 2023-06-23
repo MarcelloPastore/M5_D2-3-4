@@ -34,9 +34,8 @@ const LatestRelease = () => {
             <Row>
                 {books && books.map((book) => {
                     return(
-                        <Col xs={6} md={4}>
+                        <Col xs={6} md={4} lg={3} key={book.asin}>
                             <SingleBook 
-                                key={book.asin}
                                 img={book.img}
                                 title={book.title}
                                 category={book.category}
