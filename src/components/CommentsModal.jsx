@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -11,7 +11,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { getComments, allComments } from '../states/getComments';
-
+import { deleteComment } from '../states/deleteComments';
 
 const CommentsModal = ({ close, asin}) => {
     // todo: creo la funzione async che mi carica i commenti
@@ -40,17 +40,21 @@ const CommentsModal = ({ close, asin}) => {
                     <Modal.Body>
                         {bookComments && bookComments.map((comment) => {
                             return (
-                                <ListGroup
-                                    key={nanoid()}
-                                    className="d-flex justify-content-between align-items-start"
-                                    as="ol" numbered
-                                >
-                                    <div className='commentDiv'>
-                                        <p>{comment.comment}</p>
-                                        <p>Rate: {comment.rate}</p>
-                                        <p>Autore: {comment.author}</p>
-                                    </div>
-                                </ListGroup>
+                                <>
+                                    <ListGroup
+                                        key={nanoid()}
+                                        className="d-flex justify-content-between align-items-start"
+                                        as="ol" numbered
+                                    >
+                                        <div className='commentDiv'>
+                                            <p>{comment.comment}</p>
+                                            <p>Rate: {comment.rate}</p>
+                                            <p>Autore: {comment.author}</p>
+                                        </div>
+                                        <button onClick={deleteComment(asin)}>Delete Comment</button>
+                                    </ListGroup>
+                                </>
+                                
                             )
                         })}
                     </Modal.Body>

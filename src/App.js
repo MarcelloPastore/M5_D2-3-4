@@ -9,6 +9,7 @@ import { allBooks, getBooks, isBookLoading} from "./states/booksState";
 
 // red toolkit
 import {useDispatch, useSelector} from "react-redux";
+import FormComponent from "./components/FormComponent";
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
     <>
       <NavigationBar />
       <WelcomeHero />
+      <FormComponent />
       <LatestRelease />
       <MyFooter />
     </>

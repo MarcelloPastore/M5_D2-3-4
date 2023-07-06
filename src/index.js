@@ -11,11 +11,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 // import dei nostri reducers
 import booksReducer from './states/booksState';
 import commentsFromBookReducer from './states/getComments';
-
+import deleteCommentFromBookReducer from './states/deleteComments';
 
 const reducer = combineReducers({
   bookState: booksReducer,
   commentFromBookState: commentsFromBookReducer,
+  deleteCommentFromBook: deleteCommentFromBookReducer
 });
 
 const store = configureStore({
