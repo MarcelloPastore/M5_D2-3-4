@@ -6,26 +6,28 @@ import Row from 'react-bootstrap/esm/Row';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import { useDispatch } from 'react-redux'
+import { getBooks, filterBooks } from '../states/booksState';
 
 
-const SearchBar = ({books, setBooks, getBooks}) => {
+const SearchBar = () => {
+    const dispatch = useDispatch();
+    
 
     const [searchTerm, setSearchTerm] = useState('')
     console.log(searchTerm);
 
-    const filterBooks = (e) => {
+    const handleFilterBooks = (e) => {
         e.preventDefault();
 
-        const filterBooks = books.filter((book) => 
-        book.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-
-        setBooks(filterBooks);
+        dispatch(filterBooks(searchTerm));
+        
     };
-    // ! possiamo considerarlo un refactor
+
+    //  possiamo considerarlo un refactor
     const handleResetSearchBar = (value) => {
         if (value === '') {
-            getBooks();
+            dispatch(getBooks());
         }
 
         setSearchTerm(value);
@@ -33,10 +35,10 @@ const SearchBar = ({books, setBooks, getBooks}) => {
 
 
     return (
-        <Container>
+        <Container className='d-flex justify-content-center align-items-center'>
             <Row>
                 <Col>
-                    <Form onSubmit={filterBooks}>
+                    <Form className='d-flex align-self-center'  onSubmit={handleFilterBooks}>
                         <Form.Control 
                         onChange={(e) => handleResetSearchBar(e.target.value)}
                         type='text' 

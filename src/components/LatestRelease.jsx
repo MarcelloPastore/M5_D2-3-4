@@ -1,35 +1,18 @@
-import React,{useEffect, useState} from 'react'
+import React from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import SingleBook from './SingleBook';
-import SearchBar from './SearchBar';
+
+import { useSelector } from 'react-redux';
+import { allBooks } from '../states/booksState';
 
 const LatestRelease = () => {
-    const [books, setBooks] = useState([]);
-  
-    console.log(books);
 
-
-    const getBooksFromApi = async() => {
-        try {
-            const data = await fetch("https://epibooks.onrender.com/")
-            const response = await data.json()
-            setBooks(response);
-        } catch (error) {
-            console.error(error);
-        }
-    };
-
-    useEffect(() => {
-      getBooksFromApi()
-    }, [])
-    
-
+const books = useSelector(allBooks);
 
   return (
     <>
-        <SearchBar books={books} setBooks={setBooks} getBooks={getBooksFromApi}/>
         <Container>
             <Row>
                 {books && books.map((book) => {

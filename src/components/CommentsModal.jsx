@@ -7,36 +7,23 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import "../styles/commentModal.css"
 import "../styles/commentDiv.css"
 import AddComment from './AddComment';
+import { nanoid } from '@reduxjs/toolkit';
+
+import { useDispatch, useSelector } from 'react-redux'
+import { getComments, allComments } from '../states/getComments';
 
 
-
-const CommentsModal = ({ close, asin, title }) => {
-    const [bookComments, setBookComments] = useState(null);
-    console.log(bookComments)
-
-
-
-    const endpoint = `https://striveschool-api.herokuapp.com/api/comments/${asin}`;
-    const token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDdmNTI1Y2I5YzBmNzAwMTQ0ODRmNzQiLCJpYXQiOjE2ODc1NDM3MjgsImV4cCI6MTY4ODc1MzMyOH0.XeZ90pIzAbf0B1k3aT-y1aRy2Bgd_jsjbyKUUSMvnJo"
-
+const CommentsModal = ({ close, asin}) => {
     // todo: creo la funzione async che mi carica i commenti
-    const getCommentsFromBook = async () => {
-        try {
-            const data = await fetch(
-                endpoint, {
-                headers: {
-                    "Authorization": token
-                }
-            });
-            const response = await data.json()
-            setBookComments(response);
-        } catch (error) {
-            console.log(error)
-        }
-    };
 
+    const dispatch = useDispatch(); 
+
+    const bookComments = useSelector(allComments);
+
+    
     useEffect(() => {
-        getCommentsFromBook()
+        dispatch(getComments(asin))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [asin])
 
 
@@ -54,6 +41,7 @@ const CommentsModal = ({ close, asin, title }) => {
                         {bookComments && bookComments.map((comment) => {
                             return (
                                 <ListGroup
+                                    key={nanoid()}
                                     className="d-flex justify-content-between align-items-start"
                                     as="ol" numbered
                                 >
@@ -69,7 +57,7 @@ const CommentsModal = ({ close, asin, title }) => {
                     <Modal.Footer>
                         <AddComment
                             asin={asin}
-                            getMethod={getCommentsFromBook}
+                            getMethod={getComments}
                         >
                             Create new comment
                         </AddComment>
